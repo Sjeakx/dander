@@ -64,7 +64,7 @@
           console.log('Hiding jumpscare element and redirecting to Google');
           jumpscareElement.style.display = 'none';
           window.location.href = 'https://www.google.com';
-        }, 30009); // Jumpscare lasts for 3 seconds
+        }, 3000); // Jumpscare lasts for 3 seconds
       }).catch(error => {
         console.error('Error playing scream audio:', error);
         console.log('Redirecting to Google due to audio error');
