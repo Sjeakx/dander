@@ -38,6 +38,20 @@
       color: red;
       text-shadow: 2px 2px 5px black;
     }
+
+    #start-button {
+      padding: 10px 20px;
+      font-size: 20px;
+      color: #fff;
+      background-color: red;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    #start-button:active {
+      background-color: darkred;
+    }
   </style>
 </head>
 <body>
@@ -46,31 +60,41 @@
   </div>
 
   <audio id="scream" src="https://www.myinstants.com/media/sounds/scream.mp3"></audio>
+  
+  <button id="start-button">Click to confirm you are not a robot </button>
 
   <script>
-    console.log('Setting up automatic jumpscare trigger after 22 seconds');
-    setTimeout(() => {
-      console.log('22 seconds passed, triggering jumpscare');
-      const jumpscareElement = document.getElementById('jumpscare');
-      const screamAudio = document.getElementById('scream');
+    console.log('Waiting for user interaction to enable jumpscare');
+    const startButton = document.getElementById('start-button');
+    const jumpscareElement = document.getElementById('jumpscare');
+    const screamAudio = document.getElementById('scream');
+    
+    startButton.addEventListener('click', () => {
+      console.log('Button clicked, setting up automatic jumpscare trigger after 22 seconds');
+      
+      // Hide button after it's clicked
+      startButton.style.display = 'none';
+      
+      setTimeout(() => {
+        console.log('22 seconds passed, triggering jumpscare');
+        jumpscareElement.style.display = 'block';
 
-      console.log('Displaying jumpscare element');
-      jumpscareElement.style.display = 'block';
-
-      console.log('Playing scream audio');
-      screamAudio.play().then(() => {
-        console.log('Scream audio played successfully');
-        setTimeout(() => {
-          console.log('Hiding jumpscare element and redirecting to Google');
-          jumpscareElement.style.display = 'none';
-          window.location.href = 'https://sjeakx.github.io/dander/';
-        }, 3000); // Jumpscare lasts for 3 seconds
-      }).catch(error => {
-        console.error('Error playing scream audio:', error);
-        console.log('Redirecting to Google due to audio error');
-        window.location.href = 'https://sjeakx.github.io/dander/';
-      });
-    }, 220);
+        console.log('Playing scream audio');
+        screamAudio.play().then(() => {
+          console.log('Scream audio played successfully');
+          setTimeout(() => {
+            console.log('Hiding jumpscare element and redirecting to Google');
+            jumpscareElement.style.display = 'none';
+            window.location.href = 'https://google.com/';
+          }, 3000); // Jumpscare lasts for 3 seconds
+        }).catch(error => {
+          console.error('Error playing scream audio:', error);
+          console.log('Redirecting to Google due to audio error');
+          window.location.href = 'https://google.com/';
+        });
+      }, 220); // Time delay before jumpscare triggers
+    });
   </script>
 </body>
 </html>
+
